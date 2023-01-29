@@ -10,4 +10,4 @@ Possible external sources of data for this project are the Florida lottery websi
 Additionally, https://scratchoff-odds.com/state/fl/game/3167
 
 # Members
-Ryan Rodriguez (Front-end, Sean Hernandez (Front-end), Alejandro Leon (Back-end), Abraham Azulay Vasilescu (Back-end 
+Ryan Rodriguez (Front-end, Sean Hernandez (Front-end), Alejandro Leon (Back-end), Abraham Azulay Vasilescu (Back-end) 
