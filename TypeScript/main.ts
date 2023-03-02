@@ -30,19 +30,25 @@ let doLog2 = (message) => console.log(message);
 
 
 
+
 class Point {
     // fields
     x: number;
     y: number;
     // methods
     draw() {
-        // ...
+        console.log('X: ' + this.x + ', Y: ' + this.y);
     }
 
     getDistance(another: Point) {
         // ...
     }
 }
+
+let point: Point =  new Point();
+point.x = 1;
+point.y = 2;
+point.draw();
 
 /*
 interface Point1 {
