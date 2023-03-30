@@ -1,0 +1,13 @@
+(1)Documentation (Front-End):
+Two new modules: registration-component, login-component
+You can modify the html in app.component.html
+app.component.css modifies css of html
+Registration component can be modified under the folder registration-component
+ > registration-component.component.ts
+Since there is no backend, data is not saved. 
+
+(2) Documentation (Back-End):
+To be filled in by back end team members.
+Save data in the Back-end folder
+Currently save data in .txt file since database isnt setup
+No api available currently.
