@@ -5,16 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { RegistrationComponentComponent } from './registration-component/registration-component.component';
+import { LoginComponentComponent } from './login-component/login-component.component';
+import { MatButtonModule} from '@angular/material/button';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MyMaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StepperComponent
+    StepperComponent,
+    RegistrationComponentComponent,
+    LoginComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatToolbarModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MyMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
