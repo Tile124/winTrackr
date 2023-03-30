@@ -1,0 +1,11 @@
+
+Progress:
++ Sitemap.xml created
++ Site plan and map created, see siteMap.png
+- Removed Starter html/css code
++ Added Angular materials
++ Implemented Angular materials toolbar
++ Homepage background/design created, goal complete.
++ Created Login and registration components
++ Completed issue
++ Opened new issue

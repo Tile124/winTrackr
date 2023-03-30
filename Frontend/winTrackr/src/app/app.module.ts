@@ -11,6 +11,7 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MyMaterialModule } from './material.module';
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,14 @@ import { MyMaterialModule } from './material.module';
     MatToolbarModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MyMaterialModule
+    MyMaterialModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: 'register', component: RegistrationComponentComponent },
+      { path: 'login', component: LoginComponentComponent },
+      
+    
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
