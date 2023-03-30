@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--  created with sitemap generator https://octopus.do  -->
+
+    <url>
+        <loc>wintrackr.com</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/games</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/statistics</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/login</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/login/account</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/login/add-data</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/login/personal-stats</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>wintrackr.com/login/tax-report</loc>
+        <lastmod>2023-03-29</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>
