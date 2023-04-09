@@ -1,0 +1,58 @@
+<!--<mat-slide-toggle> 
+    Test
+</mat-slide-toggle>
+-->
+<router-outlet>
+<head>
+    <title>WinTrackr</title>
+</head>
+
+<body>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span> 
+            <img
+            width="40"
+            alt="winTrackr Logo"
+            src = "../assets/logo.png"
+            >
+        </span>
+        <span class="spacer"></span>
+        <h2>winTrackr</h2>
+        <!--<span><a href="/">Home</a></span>-->
+        <span class="spacer"></span>
+        <a mat-button routerLink="/register">Register</a>
+        <a mat-button routerLink="/login">Login</a>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div>
+    <h1>Register Menu</h1>
+    <div>
+        <p>Username: </p>
+        <input type="text" #usernameInput>
+    </div>
+    <div>
+        <p>Password: </p>
+        <input type="text" #passwordInput>
+    </div>
+    <button (click)="onUserRegister(usernameInput.value, passwordInput.value)">Register</button>
+    <p #searchResult></p>
+</div>
+
+<div>
+    <h1>Login Menu</h1>
+    <div>
+        <p>Username: </p>
+        <input type="text" #usernameInput>
+    </div>
+    <div>
+        <p>Password: </p>
+        <input type="text" #passwordInput>
+    </div>
+    <button (click)="onUserLogin(usernameInput.value, passwordInput.value)">Login</button>
+    <p #searchResult></p>
+</div>
+
+</body>
+</router-outlet>
