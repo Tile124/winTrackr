@@ -8,24 +8,4 @@ import { HttpService, User } from './http.service';
 })
 export class AppComponent {
   title = 'winTrackr';
-
-  constructor(private httpService: HttpService) {};
-
-  onUserRegister(username: string, password: string) {
-    /*
-    this.httpService.userLogin(username, password)
-      .subscribe((response) => {
-        console.log(response);
-        return response;
-      });
-    */
-  };
-
-  onUserLogin(username: string, password: string) {
-    this.httpService.userLogin(username, password)
-      .subscribe((response) => {
-        console.log(response);
-        return response;
-      });
-  };
 }

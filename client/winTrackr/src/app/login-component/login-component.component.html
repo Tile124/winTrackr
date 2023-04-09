@@ -1,1 +1,27 @@
-<p>login-component works!</p>
+<mat-toolbar>
+    <span>Login</span>
+ </mat-toolbar>
+ <mat-card class="my-card">
+    <mat-card-content>
+       <form class="my-form">
+          <!--FORM FIELDS HERE-->
+          <mat-card-content>
+            <p #errorLabel></p>
+            <form class="my-form">
+               <mat-form-field class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input  matInput placeholder="Email" name="email" #emailInput>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                  <mat-label>Password</mat-label>
+                  <input  matInput placeholder="Password" name="password" #passwordInput>
+               </mat-form-field>
+            </form>
+          </mat-card-content>
+       </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary"
+            (click)="onUserLogin(emailInput.value, passwordInput.value, errorLabel)">LOGIN</button>
+    </mat-card-actions>
+ </mat-card>

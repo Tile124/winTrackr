@@ -24,9 +24,14 @@ func main() {
 	authRouter.HandleFunc("/login", auth.LoginHandler)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:4200"},
-		AllowedHeaders: []string{"Username", "Passwordhash"},
-		Debug:          true, // TEMP: for debugging
+		AllowOriginRequestFunc: func(r *http.Request, origin string) bool {
+			return origin == "http://localhost:4200"
+		},
+		/*
+			AllowedOrigins: []string{"http://localhost:4200"},
+			AllowedHeaders: []string{"Username", "Passwordhash"},
+		*/
+		Debug: false, //true, // TEMP: for debugging
 	})
 	handler := c.Handler(mainRouter)
 
@@ -42,22 +47,3 @@ func main() {
 		fmt.Println("Error Booting the Server")
 	}
 }
-
-/*
-func HelloworldHandler(w http.ResponseWriter, r *http.Request) {
-	var data = struct {
-		Message string `json:"message"`
-	}{
-		Message: "Golang + Angular Starter Kit",
-	}
-
-	jsonBytes, err := util.StructToJSON(data)
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(jsonBytes)
-	return
-}
-*/

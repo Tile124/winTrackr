@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 	"sync"
@@ -24,11 +25,20 @@ func init() {
 
 func initUsers() {
 	userList = make([]user, 0)
+	userList = append(userList, user{
+		username: "admin",
+		password: "password",
+	})
 }
 
 type user struct {
-	username     string
-	passwordHash string
+	username string
+	password string
+}
+
+type userCredentials struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 func GetUserObject(username string) (user, bool) {
@@ -41,16 +51,16 @@ func GetUserObject(username string) (user, bool) {
 }
 
 func (u *user) ValidatePasswordHash(hash string) bool {
-	return u.passwordHash == hash
+	return u.password == hash
 }
 
-func AddUserObject(username string, passwordHash string) bool {
+func AddUserObject(credentials *userCredentials) bool {
 	u := user{
-		username:     username,
-		passwordHash: passwordHash,
+		username: credentials.Username,
+		password: credentials.Password,
 	}
 	for _, t := range userList {
-		if t.username == username {
+		if t.username == credentials.Username {
 			return false
 		}
 	}
@@ -142,83 +152,137 @@ func getSignedToken() (string, error) {
 	return tokenString, nil
 }
 
-// searches the user in the database.
-func validateUser(username string, passwordHash string) (bool, error) {
-	usr, exists := GetUserObject(username)
+// search user in database based on credentials
+func validateUser(credentials *userCredentials) (bool, error) {
+	// find user by username
+	usr, exists := GetUserObject(credentials.Username)
 	if !exists {
 		return false, errors.New("user does not exist")
 	}
-	passwordCheck := usr.ValidatePasswordHash(passwordHash)
-
-	if !passwordCheck {
-		return false, nil
-	}
-	return true, nil
+	// validate password
+	passwordCheck := usr.ValidatePasswordHash(credentials.Password)
+	return passwordCheck, nil
 }
 
-// adds the user to the database of users
+// register user handler
 func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
-	// extra error handling should be done at server side to prevent malicious attacks
-	if _, ok := r.Header["Username"]; !ok {
+	// decode request body
+	credentials := &userCredentials{}
+	err := json.NewDecoder(r.Body).Decode(credentials)
+	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
-		rw.Write([]byte("Username Missing"))
-		return
-	}
-	if _, ok := r.Header["Passwordhash"]; !ok {
-		rw.WriteHeader(http.StatusBadRequest)
-		rw.Write([]byte("Passwordhash Missing"))
 		return
 	}
 
-	// validate and then add the user
-	check := AddUserObject(r.Header["Username"][0], r.Header["Passwordhash"][0])
-	// if false means username already exists
+	// validate and add user
+	check := AddUserObject(credentials)
+	// if username already exists
 	if !check {
 		rw.WriteHeader(http.StatusConflict)
-		rw.Write([]byte("Username already exists"))
+		rw.Write([]byte("Username already exists")) // TODO
 		return
 	}
+
 	rw.WriteHeader(http.StatusOK)
-	rw.Write([]byte("User Created"))
+	rw.Write([]byte("User Created")) // TODO
+
+	/*
+		// extra error handling should be done at server side to prevent malicious attacks
+		if _, ok := r.Header["Username"]; !ok {
+			rw.WriteHeader(http.StatusBadRequest)
+			rw.Write([]byte("Username Missing"))
+			return
+		}
+		if _, ok := r.Header["Passwordhash"]; !ok {
+			rw.WriteHeader(http.StatusBadRequest)
+			rw.Write([]byte("Passwordhash Missing"))
+			return
+		}
+
+		// validate and then add the user
+		check := AddUserObject(r.Header["Username"][0], r.Header["Passwordhash"][0])
+		// if false means username already exists
+		if !check {
+			rw.WriteHeader(http.StatusConflict)
+			rw.Write([]byte("Username already exists"))
+			return
+		}
+		rw.WriteHeader(http.StatusOK)
+		rw.Write([]byte("User Created"))
+	*/
 }
 
+// login user handler
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
-	// validate the request first.
-	if _, ok := r.Header["Username"]; !ok {
-		rw.WriteHeader(http.StatusBadRequest)
-		rw.Write([]byte("Username Missing"))
-		return
-	}
-	if _, ok := r.Header["Passwordhash"]; !ok {
-		rw.WriteHeader(http.StatusBadRequest)
-		rw.Write([]byte("Passwordhash Missing"))
-		return
-	}
-	// let’s see if the user exists
-	valid, err := validateUser(r.Header["Username"][0], r.Header["Passwordhash"][0])
+	log.Println("LOGIN HANDLER")
+
+	// decode request body
+	credentials := &userCredentials{}
+	err := json.NewDecoder(r.Body).Decode(credentials)
 	if err != nil {
-		// this means either the user does not exist
-		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("User Does not Exist"))
+		log.Printf("verbose error info: %#v", err)
+		rw.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	if !valid {
-		// this means the password is wrong
+	log.Println("Username: " + credentials.Username + ", Password: " + credentials.Password)
+
+	// validate user
+	valid, err := validateUser(credentials)
+	// if user does not exist
+	if err != nil {
 		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("Incorrect Password"))
+		rw.Write([]byte("User Does not Exist")) // TODO
 		return
 	}
-	tokenString, err := getSignedToken()
-	if err != nil {
-		fmt.Println(err)
-		rw.WriteHeader(http.StatusInternalServerError)
-		rw.Write([]byte("Internal Server Error"))
+	// if password is incorrect
+	if !valid {
+		rw.WriteHeader(http.StatusUnauthorized)
+		rw.Write([]byte("Incorrect Password")) // TODO
 		return
 	}
 
 	rw.WriteHeader(http.StatusOK)
-	rw.Write([]byte(tokenString))
+	//rw.Write([]byte(tokenString)) // TODO
+
+	/*
+		// validate the request first.
+		if _, ok := r.Header["Username"]; !ok {
+			rw.WriteHeader(http.StatusBadRequest)
+			rw.Write([]byte("Username Missing"))
+			return
+		}
+		if _, ok := r.Header["Passwordhash"]; !ok {
+			rw.WriteHeader(http.StatusBadRequest)
+			rw.Write([]byte("Passwordhash Missing"))
+			return
+		}
+		// let’s see if the user exists
+		valid, err := validateUser(r.Header["Username"][0], r.Header["Passwordhash"][0])
+		if err != nil {
+			// this means either the user does not exist
+			rw.WriteHeader(http.StatusUnauthorized)
+			rw.Write([]byte("User Does not Exist"))
+			return
+		}
+
+		if !valid {
+			// this means the password is wrong
+			rw.WriteHeader(http.StatusUnauthorized)
+			rw.Write([]byte("Incorrect Password"))
+			return
+		}
+		tokenString, err := getSignedToken()
+		if err != nil {
+			fmt.Println(err)
+			rw.WriteHeader(http.StatusInternalServerError)
+			rw.Write([]byte("Internal Server Error"))
+			return
+		}
+
+		rw.WriteHeader(http.StatusOK)
+		rw.Write([]byte(tokenString))
+	*/
 }
 
 // We want all our routes for REST to be authenticated. So, we validate the token
