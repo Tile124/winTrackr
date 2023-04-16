@@ -13,13 +13,17 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MyMaterialModule } from './material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     StepperComponent,
     RegistrationComponentComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    UserStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     BrowserModule,
     BrowserAnimationsModule,
+    MatTableModule,
     MyMaterialModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
