@@ -42,7 +42,7 @@ import { LoginComponent } from './auth/login/login.component';
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: 'register', component: RegistrationComponentComponent },
-      { path: 'login', component: LoginComponentComponent },
+      { path: 'login', component: LoginComponent },
       
     
     ]),
