@@ -30,3 +30,21 @@ TODO: Look into making homepage it's own component.
 >Files modified: app-routing.module.ts, app.component.ts, app.component.html, login.component.html, login.component.ts
 >Plans: A significant restructuring of the frontend needs to be done. A home page needs to be made, and modules need
 to be created for public and private views.
+
+----------------------------------------------------------------------------------------
+
+04/17/2023 - Ryan - 02
++ Created Shared module: Will contain shared stuff to be used in app
++ Created Core module: Will contain services/core functionality that should only happen once per application
++ Created Auth module: Contain the login and registration components and their services to interact with backend.
++ Created Public module: Will contain public-facing parts of site. Homepage, Public stats, and toolbar.
++ Created User module: Will contain authed user component. Dashboard, Game entry, privacy settings, user profile.
+= Moved Registration component to Auth module.
+= Moved Login component to Auth module.
++ Renamed this changelog to Ryan_Changelog and created Alejandro_Changelog
+>Explanation: In order to meet the specifications of the project, a restructuring of the frontend needed to be done.
+	The current setup makes the frontend 6 modules (includes app module). In each module, there are components 
+	and other stuff needed.
+>Note: The login and registration components are no longer in the app module. You can find them under Auth module.
+>Plans: The homepage component hasnt been made. Need to finish the restructuring in the app module.
+

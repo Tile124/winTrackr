@@ -3,7 +3,7 @@
 * the best scratchoff game odds.
 * @Tile124
 * Ryan Rodriguez
-*
+* Last modified 4/16/2023
 */
 import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
