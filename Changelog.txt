@@ -1,0 +1,32 @@
+----------------------------------------------------------------------------------------
+04/16/2023 - Ryan - 01
++ Changed up the homepage html (app.component.html) to display two tables of
+top user stats and top scratchoff game odds.
+
++ Added user-statistics component: This makes (and handles?) the user-statistics variables
+used in app.component.html to display the the tables. This might be redundant and
+I'm not sure yet on how to make it pull data from the database?
+
++ There is an archive folder in the client folder. This is where i'll be putting old code
+incase I have to look at older versions.
+
++ Created this changelog to help make it easier for other people to understand the changes
+I make in order.
+
++ Started adding some comments to files (at the top) I work on so other group members 
+can understand them better.
+
+>Summary: New user-statistics.component, modified app.component.html, app.component.ts, changelog.txt
+(Only modified client folder)
+>Plans: Make a dedicated login page, make a registration page, and work on the server to handle this
+
+----------------------------------------------------------------------------------------
+
+04/17/2023 - Ryan - 01
++ Made new login component.
+- Old login-component has been retired and renamed to old-login-component.
+TODO: Look into making homepage it's own component.
+>Summary: Made new login component and working on a fix to router problem.
+>Files modified: app-routing.module.ts, app.component.ts, app.component.html, login.component.html, login.component.ts
+>Plans: A significant restructuring of the frontend needs to be done. A home page needs to be made, and modules need
+to be created for public and private views.

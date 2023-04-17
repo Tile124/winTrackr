@@ -1,63 +1,52 @@
-<!--<mat-slide-toggle> 
-    Test
-</mat-slide-toggle>
--->
-<router-outlet>
-<!--
-<head>
-    <title>WinTrackr</title>
-</head>
-
-<body>
--->
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span> 
-            <img
-            width="40"
-            alt="winTrackr Logo"
-            src = "../assets/logo.png"
-            >
-        </span>
-        <span class="spacer"></span>
-        <h2>winTrackr</h2>
-        <!--<span><a href="/">Home</a></span>-->
-        <span class="spacer"></span>
-        <a mat-button routerLink="/register">Register</a>
-        <a mat-button routerLink="/login">Login</a>
-    </mat-toolbar-row>
+  <img src="assets/winTrackr-logo.png" alt="winTrackr Logo" height="32">
+  <span class="spacer"></span>
+  <a mat-button routerLink="/login">Login</a>
+  <a mat-button routerLink="/register">Register</a>
 </mat-toolbar>
-<!--
-<div>
-    <h1>Register Menu</h1>
-    <div>
-        <p>Username: </p>
-        <input type="text" #usernameInputLogin>
-    </div>
-    <div>
-        <p>Password: </p>
-        <input type="text" #passwordInputLogin>
-    </div>
-    <button (click)="onUserRegister(usernameInputLogin.value, passwordInputLogin.value)">Register</button>
-    <p #searchResult></p>
-</div>
 
-<div>
-    <h1>Login Menu</h1>
-    <div>
-        <p>Username: </p>
-        <input type="text" #usernameInputRegister>
-    </div>
-    <div>
-        <p>Password: </p>
-        <input type="text" #passwordInputRegister>
-    </div>
-    <button (click)="onUserLogin(usernameInputRegister.value, passwordInputRegister.value)">Login</button>
-    <p #searchResult></p>
-</div>
--->
+<router-outlet></router-outlet>
+<div class="container">
+  <div class="table-container">
+    <h2>User Statistics</h2>
+    <app-user-statistics [userStats]="userStats"></app-user-statistics>
+    <table mat-table [dataSource]="userStats" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>User</th>
+        <td mat-cell *matCellDef="let element">{{element.username}}</td>
+      </ng-container>
+      <ng-container matColumnDef="wins">
+        <th mat-header-cell *matHeaderCellDef>Profit</th>
+        <td mat-cell *matCellDef="let element">{{element.profit}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['username', 'wins']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['username', 'wins'];"></tr>
+    </table>
+  </div>
 
-<!--
-</body>
--->
-</router-outlet>
+  <div class="table-container">
+    <h2>Scratchoff Game Odds</h2>
+    <table mat-table [dataSource]="gameOdds" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.gameName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="odds">
+        <th mat-header-cell *matHeaderCellDef>Odds</th>
+        <td mat-cell *matCellDef="let element">{{element.odds}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['name', 'odds']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['name', 'odds'];"></tr>
+    </table>
+  </div>
+</div>
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .table-container {
+    width: 48%;
+  }
+</style>
