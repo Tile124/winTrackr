@@ -1,3 +1,9 @@
+/*
+* This is the main TS file for the app.component
+* @Tile124
+* Ryan Rodriguez
+*
+*/
 import { Component } from '@angular/core';
 import { HttpService, User } from './http.service';
 import { Router } from '@angular/router';
@@ -10,6 +16,13 @@ import { PlayerStatistics, GameStatistics } from './user-statistics/user-statist
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(private router: Router) {}
+
+  navigateToLoginPage() {
+    this.router.navigate(['/login']);
+  }
+
   userStats: PlayerStatistics[] = [
     { username: 'Alin Dobra, FL', profit: '$635.00' },
     { username: 'Kent Fuchs, FL', profit: '$294.50' },

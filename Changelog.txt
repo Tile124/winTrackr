@@ -16,7 +16,17 @@ I make in order.
 + Started adding some comments to files (at the top) I work on so other group members 
 can understand them better.
 
-Summary: New user-statistics.component, modified app.component.html, app.component.ts, changelog.txt
+>Summary: New user-statistics.component, modified app.component.html, app.component.ts, changelog.txt
 (Only modified client folder)
-Plans: Make a dedicated login page, make a registration page, and work on the server to handle this
+>Plans: Make a dedicated login page, make a registration page, and work on the server to handle this
+
 ----------------------------------------------------------------------------------------
+
+04/17/2023 - Ryan - 01
++ Made new login component.
+- Old login-component has been retired and renamed to old-login-component.
+TODO: Look into making homepage it's own component.
+>Summary: Made new login component and working on a fix to router problem.
+>Files modified: app-routing.module.ts, app.component.ts, app.component.html, login.component.html, login.component.ts
+>Plans: A significant restructuring of the frontend needs to be done. A home page needs to be made, and modules need
+to be created for public and private views.

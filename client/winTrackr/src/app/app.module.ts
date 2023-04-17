@@ -7,7 +7,7 @@ import { StepperComponent } from './stepper/stepper.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegistrationComponentComponent } from './registration-component/registration-component.component';
-import { LoginComponentComponent } from './login-component/login-component.component';
+import { LoginComponentComponent } from './old-login-component/login-component.component';
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MyMaterialModule } from './material.module';
@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { UserStatisticsComponent } from './user-statistics/user-statistics.compo
     StepperComponent,
     RegistrationComponentComponent,
     LoginComponentComponent,
-    UserStatisticsComponent
+    UserStatisticsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
