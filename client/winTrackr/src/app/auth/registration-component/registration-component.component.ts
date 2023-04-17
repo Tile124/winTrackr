@@ -1,5 +1,11 @@
+/*
+* This component is the registration page.
+* @Tile124
+* Ryan Rodriguez
+* Last modified: 04/17/2023
+*/
 import { Component } from '@angular/core';
-import { HttpService, User } from '../http.service';
+import { HttpService, User } from '../../http.service';
 
 @Component({
   selector: 'app-registration-component',
