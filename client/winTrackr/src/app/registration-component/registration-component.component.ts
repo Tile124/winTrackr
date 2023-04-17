@@ -9,8 +9,8 @@ import { HttpService, User } from '../http.service';
 export class RegistrationComponentComponent {
   constructor(private httpService: HttpService) {};
 
-  onUserRegister(username: string, password: string, userLabel: HTMLElement) {
-    this.httpService.userRegister(username, password)
+  onUserRegister(email: string, password: string, userLabel: HTMLElement) {
+    this.httpService.userRegister(email, password)
       .subscribe({
         next: (response) => { // TODO: REGISTER USER (redirect to login page? or home/welcome page?)
           console.log(response);

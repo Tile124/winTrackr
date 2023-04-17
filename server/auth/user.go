@@ -14,8 +14,24 @@ import (
 	"time"
 )
 
+type user struct {
+	email    string
+	password string
+}
+
+type userCredentials struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type session struct {
+	email  string
+	expiry time.Time
+}
+
 var (
 	userList []user
+	sessions map[string]session
 	once     sync.Once
 )
 
@@ -26,24 +42,18 @@ func init() {
 func initUsers() {
 	userList = make([]user, 0)
 	userList = append(userList, user{
-		username: "admin",
+		email:    "admin",
 		password: "password",
 	})
 }
 
-type user struct {
-	username string
-	password string
+func (s session) isExpired() bool {
+	return s.expiry.Before(time.Now())
 }
 
-type userCredentials struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-func GetUserObject(username string) (user, bool) {
+func GetUserObject(email string) (user, bool) {
 	for _, user := range userList {
-		if user.username == username {
+		if user.email == email {
 			return user, true
 		}
 	}
@@ -56,11 +66,11 @@ func (u *user) ValidatePasswordHash(hash string) bool {
 
 func AddUserObject(credentials *userCredentials) bool {
 	u := user{
-		username: credentials.Username,
+		email:    credentials.Email,
 		password: credentials.Password,
 	}
 	for _, t := range userList {
-		if t.username == credentials.Username {
+		if t.email == credentials.Email {
 			return false
 		}
 	}
@@ -154,8 +164,8 @@ func getSignedToken() (string, error) {
 
 // search user in database based on credentials
 func validateUser(credentials *userCredentials) (bool, error) {
-	// find user by username
-	usr, exists := GetUserObject(credentials.Username)
+	// find user by email
+	usr, exists := GetUserObject(credentials.Email)
 	if !exists {
 		return false, errors.New("user does not exist")
 	}
@@ -176,10 +186,10 @@ func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 
 	// validate and add user
 	check := AddUserObject(credentials)
-	// if username already exists
+	// if email already exists
 	if !check {
 		rw.WriteHeader(http.StatusConflict)
-		rw.Write([]byte("Username already exists")) // TODO
+		rw.Write([]byte("Account with the given email already exists")) // TODO
 		return
 	}
 
@@ -214,8 +224,6 @@ func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 
 // login user handler
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("LOGIN HANDLER")
-
 	// decode request body
 	credentials := &userCredentials{}
 	err := json.NewDecoder(r.Body).Decode(credentials)
@@ -224,8 +232,6 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusBadRequest)
 		return
 	}
-
-	log.Println("Username: " + credentials.Username + ", Password: " + credentials.Password)
 
 	// validate user
 	valid, err := validateUser(credentials)
@@ -241,6 +247,22 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 		rw.Write([]byte("Incorrect Password")) // TODO
 		return
 	}
+
+	/*
+		sessionToken := uuid.NewString()
+		expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
+
+		sessions[sessionToken] = session{
+			email:  credentials.Email,
+			expiry: expiresAt,
+		}
+
+		http.SetCookie(rw, &http.Cookie{
+			Name:    "session_token",
+			Value:   sessionToken,
+			Expires: expiresAt,
+		})
+	*/
 
 	rw.WriteHeader(http.StatusOK)
 	//rw.Write([]byte(tokenString)) // TODO

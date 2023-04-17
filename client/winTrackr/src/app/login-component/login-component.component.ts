@@ -9,8 +9,8 @@ import { HttpService, User } from '../http.service';
 export class LoginComponentComponent {
   constructor(private httpService: HttpService) {};
 
-  onUserLogin(username: string, password: string, userLabel: HTMLElement) {
-    this.httpService.userLogin(username, password)
+  onUserLogin(email: string, password: string, userLabel: HTMLElement) {
+    this.httpService.userLogin(email, password)
       .subscribe({
         next: (response) => { // TODO: LOGIN USER (redirect to home/welcome page?)
           console.log(response);

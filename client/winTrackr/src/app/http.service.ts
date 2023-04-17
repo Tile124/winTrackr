@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 export interface User {
-  username: string
+  email: string
   password: string
 }
 
@@ -37,7 +37,7 @@ export class HttpService {
     }
   }
 
-  userLogin(username: string, password: string) {
+  userLogin(email: string, password: string) {
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -45,14 +45,14 @@ export class HttpService {
       responseType: "text" as const
     };
 
-    const content = { username, password } as User;
+    const content = { email, password } as User;
     return this.http.post("http://localhost:3000/auth/login", content, requestOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  userRegister(username: string, password: string) {
+  userRegister(email: string, password: string) {
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -60,7 +60,7 @@ export class HttpService {
       responseType: "text" as const
     };
 
-    const content = { username, password } as User;
+    const content = { email, password } as User;
     return this.http.post("http://localhost:3000/auth/register", content, requestOptions)
       .pipe(
         catchError(this.handleError)
