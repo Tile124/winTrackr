@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 // Added 04/16 by Ryan. Routes pages 
 const routes: Routes = [
-  //{ path: '', component: AppComponent }, //TODO: Look into making homepage it's own component
+  { path: 'home', component: AppComponent }, //TODO: Look into making homepage it's own component
   { path: 'login', component: LoginComponent },
   //{ path: 'register', component: RegisterComponent }
 ];

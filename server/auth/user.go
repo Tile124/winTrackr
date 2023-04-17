@@ -12,6 +12,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type user struct {
@@ -248,24 +250,22 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	/*
-		sessionToken := uuid.NewString()
-		expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
-
-		sessions[sessionToken] = session{
-			email:  credentials.Email,
-			expiry: expiresAt,
-		}
-
-		http.SetCookie(rw, &http.Cookie{
-			Name:    "session_token",
-			Value:   sessionToken,
-			Expires: expiresAt,
-		})
-	*/
-
 	rw.WriteHeader(http.StatusOK)
 	//rw.Write([]byte(tokenString)) // TODO
+
+	sessionToken := uuid.NewString()
+	expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
+
+	sessions[sessionToken] = session{
+		email:  credentials.Email,
+		expiry: expiresAt,
+	}
+
+	http.SetCookie(rw, &http.Cookie{
+		Name:    "session_token",
+		Value:   sessionToken,
+		Expires: expiresAt,
+	})
 
 	/*
 		// validate the request first.
@@ -305,6 +305,41 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 		rw.Write([]byte(tokenString))
 	*/
+}
+
+func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
+	// We can obtain the session token from the requests cookies, which come with every request
+	c, err := r.Cookie("session_token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			rw.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		rw.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	sessionToken := c.Value
+
+	// We then get the session from our session map
+	userSession, exists := sessions[sessionToken]
+	if !exists {
+		// If the session token is not present in session map, return an unauthorized error
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	// If the session is present, but has expired, we can delete the session, and return
+	// an unauthorized status
+	if userSession.isExpired() {
+		delete(sessions, sessionToken)
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	// If the session is valid, return the welcome message to the user
+	rw.WriteHeader(http.StatusOK)
+	rw.Write([]byte(fmt.Sprintf("Welcome %s!", userSession.email)))
 }
 
 // We want all our routes for REST to be authenticated. So, we validate the token

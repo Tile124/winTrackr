@@ -3,16 +3,16 @@
     @Tile124
     Ryan Rodriguez
 -->
-<p>login works!</p>
+<p #errorLabel>login works!</p>
 <form>
     <mat-form-field>
-      <input matInput placeholder="Email" required>
+      <input #emailInput matInput placeholder="Email" required>
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput type="password" placeholder="Password" required>
+      <input #passwordInput matInput type="password" placeholder="Password" required>
     </mat-form-field>
   
-    <button mat-raised-button>Login</button>
+    <button mat-raised-button (click)="onUserLogin(emailInput.value, passwordInput.value, errorLabel)">Login</button>
   </form>
   

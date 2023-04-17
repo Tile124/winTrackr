@@ -23,6 +23,8 @@ func main() {
 	// So, ultimately, we would need a middleware
 	authRouter.HandleFunc("/login", auth.LoginHandler)
 
+	authRouter.HandleFunc("/home", auth.UserHomeHandler)
+
 	c := cors.New(cors.Options{
 		AllowOriginRequestFunc: func(r *http.Request, origin string) bool {
 			return origin == "http://localhost:4200"
