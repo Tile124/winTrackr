@@ -1,49 +1,14 @@
 package main
 
-/*
-* This file will contain the main function to start the server,
-* set up routing, and configure the connection to Firebase.
-*
- */
 import (
-	//"fmt"
-	"log"
+	"fmt"
 	"net/http"
 
+	"github.com/Tile124/winTrackr/auth"
 	"github.com/gorilla/mux"
-
-	//"github.com/Tile124/winTrackr/auth"
-	"github.com/Tile124/winTrackr/handlers"
-	"github.com/Tile124/winTrackr/middleware"
-
-	//"github.com/Tile124/winTrackr/models"
-	"github.com/Tile124/winTrackr/utils"
-	//"github.com/rs/cors"
+	"github.com/rs/cors"
 )
 
-func main() {
-	// Initialize Firebase connection
-	err := utils.InitFirebase()
-	if err != nil {
-		log.Fatalf("Error initializing Firebase: %v", err)
-	}
-
-	router := mux.NewRouter()
-
-	// Public routes
-	router.HandleFunc("/api/login", handlers.Login).Methods("POST")
-	router.HandleFunc("/api/register", handlers.Register).Methods("POST")
-	router.HandleFunc("/api/profile/{username}", handlers.UserProfile).Methods("GET")
-
-	// Protected routes (use JWT middleware)
-	router.HandleFunc("/api/privacy-settings", middleware.JWTAuth(handlers.GetPrivacySettings)).Methods("GET")
-	router.HandleFunc("/api/privacy-settings", middleware.JWTAuth(handlers.UpdatePrivacySettings)).Methods("PUT")
-	router.HandleFunc("/api/scratch-off", middleware.JWTAuth(handlers.AddScratchOff)).Methods("POST")
-
-	log.Fatal(http.ListenAndServe(":8080", router))
-}
-
-/* Temporarily commenting this, im testing a firebase type implementation
 func main() {
 	mainRouter := mux.NewRouter()
 
@@ -67,7 +32,7 @@ func main() {
 		/*
 			AllowedOrigins: []string{"http://localhost:4200"},
 			AllowedHeaders: []string{"Username", "Passwordhash"},
-
+		*/
 		Debug: false, //true, // TEMP: for debugging
 	})
 	handler := c.Handler(mainRouter)
@@ -84,4 +49,3 @@ func main() {
 		fmt.Println("Error Booting the Server")
 	}
 }
-*/
