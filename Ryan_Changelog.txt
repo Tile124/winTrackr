@@ -80,3 +80,16 @@ to be created for public and private views.
 
 Update: login, registration, statistics, scratchoff, and dashboard are now all accessible in browser.
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 04
++ Fixed issue with package.json. 
+It was impossible to do npm install. After spending 2-3 hours looking for the issue, it was found
+that @angular/core was automatically set to 15.2.7 for some reason. This caused conflicts.
+Fixed by setting relevant entries in package.json and package_lock.json to 15.2.0
+
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 05
++ Started work on toolbar
++ Cookie service import

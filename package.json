@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@angular/fire": "^7.5.0"
+    "@angular/fire": "^7.5.0",
+    "ngx-cookie": "^6.0.1"
   }
 }

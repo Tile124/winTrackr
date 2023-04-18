@@ -7,6 +7,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../../http.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { HttpService } from '../../http.service';
 })
 export class LoginComponent {
 
-  constructor(private httpService: HttpService, private router: Router) { }
+  constructor(private httpService: HttpService, private router: Router, private cookieService: CookieService) { }
 
   login(): void {
     // TODO: Authenticate user via API request

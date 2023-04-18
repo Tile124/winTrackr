@@ -16,7 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { UserStatisticsComponent } from './archive/user-statistics/user-statistics.component';
 import { LoginComponent } from './public/login/login.component';
-
+// add this import at top
+import { CookieService } from 'ngx-cookie-service';
+// below insert CookieService in the providers array:
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { LoginComponent } from './public/login/login.component';
     
     ]),
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
