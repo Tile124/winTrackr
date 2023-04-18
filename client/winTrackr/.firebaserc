@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "wintrackr-29ba8": {
+      "hosting": {
+        "winTrackr": [
+          "wintrackr-29ba8"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "wintrackr-29ba8"
+  }
+}

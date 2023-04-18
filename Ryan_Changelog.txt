@@ -48,3 +48,18 @@ to be created for public and private views.
 >Note: The login and registration components are no longer in the app module. You can find them under Auth module.
 >Plans: The homepage component hasnt been made. Need to finish the restructuring in the app module.
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 01
++ Created homepage component in public module
++ Created public statistics component in public module
++ Backend: Created a handlers folder
++ Backend: Created a publicStatistics.go file. This serves the public stats data.
++ Backend: Created a models folder
++ Backend: Created a user.go file
++ Added environment folder in src (ng generate environments)
++ Added firebase config in enviroment.ts
++ Imported AngularFireModule/FirestoreModule in app.module.ts
+For further implementation: https://www.securecoding.com/blog/angular-firebase-authentication-integration/
++ Firebase database created (implementation pending)
+NOTE: winTrackr-current\winTrackr\server>go get firebase.google.com/go/v4

@@ -7,11 +7,18 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
+import { PublicStatisticsComponent } from './public-statistics/public-statistics.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomepageComponent,
+    PublicStatisticsComponent,
+    ToolbarComponent
+  ],
   imports: [
     CommonModule
   ]
