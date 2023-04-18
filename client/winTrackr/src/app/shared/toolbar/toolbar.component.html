@@ -1,1 +1,17 @@
-<p>toolbar works!</p>
+<mat-toolbar>
+    <span class="logo" routerLink="/">Website Logo</span>
+    <span class="spacer"></span>
+  
+    <ng-container *ngIf="authService.isLoggedIn(); else notLoggedIn">
+      <button mat-button routerLink="/dashboard">Dashboard</button>
+      <button mat-button routerLink="/scratchoff">Scratchoff Entry</button>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  
+    <ng-template #notLoggedIn>
+      <button mat-button routerLink="/statistics">Statistics</button>
+      <button mat-button routerLink="/login">Login</button>
+      <button mat-button routerLink="/register">Registration</button>
+    </ng-template>
+  </mat-toolbar>
+  

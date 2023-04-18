@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { UserStatisticsComponent } from './archive/user-statistics/user-statistics.component';
 import { LoginComponent } from './public/login/login.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { LoginComponent } from './public/login/login.component';
       
     
     ]),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

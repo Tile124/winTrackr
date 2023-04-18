@@ -80,3 +80,15 @@ to be created for public and private views.
 
 Update: login, registration, statistics, scratchoff, and dashboard are now all accessible in browser.
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 04
++ Added code to toolbar component
++ Installed @angular/firebase
++ Generated environments folder
++ Put firebase config in enviroment.ts
++ Updated app.module.ts to include firebase
++ Created an experimental server folder to test my implementation without breaking other things.
+
+IP: Toolbar component
+
