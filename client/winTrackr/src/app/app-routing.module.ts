@@ -6,7 +6,7 @@
 */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './public/login/login.component';
 import { AppComponent } from './app.component';
 
 // Added 04/16 by Ryan. Routes pages 

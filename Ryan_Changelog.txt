@@ -48,3 +48,11 @@ to be created for public and private views.
 >Note: The login and registration components are no longer in the app module. You can find them under Auth module.
 >Plans: The homepage component hasnt been made. Need to finish the restructuring in the app module.
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 01
+= Changing structures to these modules: core, shared, public, private.
+= Moved login and registration components to public.
+- Removed modules auth, user, and user-statistics (in archive).
+
+

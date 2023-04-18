@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 import { HttpService, User } from './http.service';
 import { Router } from '@angular/router';
-import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
-import { PlayerStatistics, GameStatistics } from './user-statistics/user-statistics.component';
+import { UserStatisticsComponent } from './archive/user-statistics/user-statistics.component';
+import { PlayerStatistics, GameStatistics } from './archive/user-statistics/user-statistics.component';
 
 @Component({
   selector: 'app-root',

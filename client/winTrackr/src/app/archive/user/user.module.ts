@@ -10,6 +10,9 @@
 * Ryan Rodriguez
 * Last modified: 04/17/2023
 */
+
+
+/*
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,3 +25,5 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class UserModule { }
+
+*/
