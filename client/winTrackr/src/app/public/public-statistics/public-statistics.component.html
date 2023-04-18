@@ -1,1 +1,19 @@
-<p>public-statistics works!</p>
+<div class="public-statistics">
+    <h1>Public Statistics</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Total Profit</th>
+          <th>Number of Games</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of publicStats">
+          <td>{{ stat.id }}</td>
+          <td>{{ stat.totalProfit }}</td>
+          <td>{{ stat.numGames }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

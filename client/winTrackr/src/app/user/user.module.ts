@@ -12,7 +12,11 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+<<<<<<< Updated upstream
 import { ScratchOffDataComponent } from '../scratch-off-data/scratch-off-data.component';
+=======
+import { ScratchOffDataComponent } from './scratch-off-data/scratch-off-data.component';
+>>>>>>> Stashed changes
 
 
 

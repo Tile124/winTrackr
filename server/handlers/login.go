@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/yourusername/yourproject/models"
-	"github.com/yourusername/yourproject/utils"
+	"github.com/Tile124/winTrackr/models"
+	"github.com/Tile124/winTrackr/utils"
 )
 
 type LoginRequest struct {

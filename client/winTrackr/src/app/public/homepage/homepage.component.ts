@@ -1,3 +1,10 @@
+/*
+* Homepage Tyescript file
+* @Tile124
+* Ryan Rodriguez
+* Last modified: 04/17/2023
+*
+*/
 import { Component } from '@angular/core';
 
 @Component({

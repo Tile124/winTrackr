@@ -10,8 +10,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"models"
-	"utils"
+	"github.com/Tile124/winTrackr/models"
+	"github.com/Tile124/winTrackr/utils"
 )
 
 func GetPublicStatistics(w http.ResponseWriter, r *http.Request) {

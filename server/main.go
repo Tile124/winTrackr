@@ -34,6 +34,7 @@ func main() {
 	router.HandleFunc("/api/login", handlers.Login).Methods("POST")
 	router.HandleFunc("/api/register", handlers.Register).Methods("POST")
 	router.HandleFunc("/api/profile/{username}", handlers.UserProfile).Methods("GET")
+	router.HandleFunc("/api/public-statistics", handlers.GetPublicStatistics).Methods("GET")
 
 	// Protected routes (use JWT middleware)
 	router.HandleFunc("/api/privacy-settings", middleware.JWTAuth(handlers.GetPrivacySettings)).Methods("GET")
