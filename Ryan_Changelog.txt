@@ -55,4 +55,17 @@ to be created for public and private views.
 = Moved login and registration components to public.
 - Removed modules auth, user, and user-statistics (in archive).
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 02
++ Created services folder under core. Includes auth, scratchoff, and statistics service.ts
++ Created guards folder under core. Includes auth.guard.ts
++ Created components folder under shared, public, and private.
++ Created toolbar component under shared.
++ Created homepage component under public.
++ Created public-statistics component component under public.
++ Created scratchoff component under private.
++ Created dashboard component under private.
+
+
 
