@@ -1,0 +1,61 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+    background: #FA4616;
+    /*
+  background: linear-gradient(-90deg, #FA4616, #0021A5, #FA4616);
+  background-size: 50% 5%;
+  animation: gradient 0s ease infinite;
+  */
+}
+/*
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+*/
+.main-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.banner-content {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 800px;
+}
+
+.headline {
+  color: #0021A5;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.subheadline {
+  color: #2196F3;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.tax-info {
+  color: #2196F3;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
