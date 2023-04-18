@@ -1,4 +1,6 @@
 export const environment = {
+    apiURL: 'http://localhost:3000',
+    
   firebase: {
     projectId: 'wintrackr-29ba8',
     appId: '1:116882284330:web:4063088d6b4d13a7310853',

@@ -12,11 +12,14 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScratchOffDataComponent } from '../scratch-off-data/scratch-off-data.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ScratchOffDataComponent
+  ],
   imports: [
     CommonModule
   ]

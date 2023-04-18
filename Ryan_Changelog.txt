@@ -63,3 +63,8 @@ to be created for public and private views.
 For further implementation: https://www.securecoding.com/blog/angular-firebase-authentication-integration/
 + Firebase database created (implementation pending)
 NOTE: winTrackr-current\winTrackr\server>go get firebase.google.com/go/v4
+
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 02
++ src/app/logged-in/scratch-off-form/scratch-off-form.component.ts
