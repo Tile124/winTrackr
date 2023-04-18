@@ -9,13 +9,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicStatisticsComponent } from './public-statistics/public-statistics.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
 @NgModule({
   declarations: [
     HomepageComponent,
-    PublicStatisticsComponent
+    PublicStatisticsComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@angular/fire": "^7.5.0"
+  }
+}

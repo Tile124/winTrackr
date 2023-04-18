@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RegistrationComponentComponent } from './public/registration-component/registration-component.component';
+import { RegistrationComponentComponent } from './archive/registration-component/registration-component.component';
 import { LoginComponentComponent } from './archive/old-login-component/login-component.component';
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule} from '@angular/material/toolbar';

@@ -68,4 +68,15 @@ to be created for public and private views.
 + Created dashboard component under private.
 
 
+----------------------------------------------------------------------------------------
+
+04/18/2023 - Ryan - 03
+- Removed folders named component under each module.
+= Remade registration component.
++ Remade guard/auth.guard as a guard instead of a file
++ Remade auth, scratchoff, and statistics service as a service instead of a file
++ Updated app-routing
++ Updated app.component.html to be just a router.
+
+Update: login, registration, statistics, scratchoff, and dashboard are now all accessible in browser.
 
