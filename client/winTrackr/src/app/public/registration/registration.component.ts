@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from 'app/core/services/alert.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,6 +17,8 @@ export class RegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private alertService: AlertService,
+    private authService: AuthService,
+    private router: Router,
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -26,25 +30,28 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit(): void {
     console.log('Registration button pressed')
     //if (this.registrationForm.valid) {
       const formData = this.registrationForm.value;
 
-      this.http
-        .post('/api/register', formData)
-        .subscribe(
-          (response) => {
+      this.authService.register(formData.email, formData.password)
+        .subscribe({
+          next: (response) => {
             console.log('Registration success:', response);
             // Perform any additional actions upon successful registration, e.g., navigate to another page
           },
-          (error) => {
+          error: error => {
             console.error('Registration error:', error);
-            this.alertService.showAlert('Registration Error');
+            this.alertService.showAlert(error);
           }
-        );
+        });
     }
   //}
 }

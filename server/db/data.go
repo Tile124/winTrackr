@@ -75,7 +75,6 @@ func GetUserCredentials(userEmail string) (string, error) {
 	row := userDb.QueryRow(statement, userEmail)
 	err := row.Scan(&id, &email, &password)
 	if err != nil {
-		log.Fatal(err)
 		return "", err
 	}
 	return password, err

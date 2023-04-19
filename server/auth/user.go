@@ -103,12 +103,12 @@ func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 	// if email already exists
 	if !check {
 		rw.WriteHeader(http.StatusConflict)
-		rw.Write([]byte("Account with the given email already exists")) // TODO
+		rw.Write([]byte("User with the given email already exists"))
 		return
 	}
 
 	rw.WriteHeader(http.StatusOK)
-	rw.Write([]byte("User Created")) // TODO
+	rw.Write([]byte("User created"))
 }
 
 // login user handler
@@ -127,13 +127,13 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	// if user does not exist
 	if err != nil {
 		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("User Does not Exist")) // TODO
+		rw.Write([]byte("User with given email does not exist"))
 		return
 	}
 	// if password is incorrect
 	if !valid {
 		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("Incorrect Password")) // TODO
+		rw.Write([]byte("Incorrect password"))
 		return
 	}
 

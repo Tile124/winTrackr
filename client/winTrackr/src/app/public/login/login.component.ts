@@ -31,7 +31,11 @@ export class LoginComponent  {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit(): void {
     console.log('Login button pressed')
@@ -47,7 +51,7 @@ export class LoginComponent  {
           },
           error: (error: any) => {
             console.log("Login Error");
-            this.alertService.showAlert('Invalid email or password');
+            this.alertService.showAlert(error);
           }
         });
     }
