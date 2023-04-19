@@ -1,0 +1,64 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    }
+    
+    .welcome-text {
+    font-size: 2rem;
+    color: #3f51b5;
+    margin: 1rem 0;
+    }
+    
+    .main-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    gap: 1rem;
+    }
+    
+    .entries-section,
+    .entry-form-section,
+    .stats-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #424242;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+    font-size: 1.5rem;
+    color: #FA4616;
+    margin-bottom: 1rem;
+    }
+    
+    mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+    }
+    
+    button {
+    margin-top: 1rem;
+    }
+    
+    .stats-section p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #eb6039;
+    }
+
+    .mat-row {
+        background-color: transparent !important;
+      }
+      
+      .button-container {
+        display: flex;
+        justify-content: center;
+      }

@@ -7,13 +7,17 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScratchOffEntryService } from './services/scratch-off-entry.service';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+  ],
+  providers: [
+    ScratchOffEntryService,
   ]
 })
 export class CoreModule { }

@@ -22,6 +22,7 @@ import { LoginComponent } from './public/login/login.component';
 */
 
 import { PublicModule } from './public/public.module';
+import { PrivateModule } from './private/private.module';
 // add this import at top
 import { CookieService } from 'ngx-cookie-service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -51,6 +52,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule.forRoot([]),
     ReactiveFormsModule,
     PublicModule,
+    PrivateModule,
     
     /*
     RouterModule.forRoot([
