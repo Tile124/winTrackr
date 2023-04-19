@@ -8,7 +8,7 @@ import { MatSnackBarConfig } from '@angular/material/snack-bar';
 export class AlertService {
 
   private snackBarConfig: MatSnackBarConfig = {
-    duration: 10000, // Display for 3 seconds
+    duration: 3000, // Display for 3 seconds
     verticalPosition: 'top', // Show at the top of the screen
     panelClass: 'red-snackbar' // Apply red background color
   };

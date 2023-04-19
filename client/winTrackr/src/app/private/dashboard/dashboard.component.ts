@@ -3,6 +3,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'app/core/services/alert.service';
 
 export interface Entry {
   date: string;
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit {
   entries: MatTableDataSource<Entry>;
   entryForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, 
+    private alertService: AlertService,) {
     this.entries = new MatTableDataSource<Entry>([]);
     this.entryForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -42,7 +44,8 @@ export class DashboardComponent implements OnInit {
         },
         error: (error: any) => {
           this.message = "Error";
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
+          this.alertService.showAlert('Unauthorized: Please login');
         }
       });
   }
@@ -74,4 +77,18 @@ export class DashboardComponent implements OnInit {
   clearForm(): void {
   this.entryForm.reset();
   }
+
+  // Event handler for generating tax report
+  generateTaxReport(): void {
+    console.error('Generate Tax Report clicked.');
+    this.alertService.showAlert('A server error occurred. Please try again later.');
+  }
+
+  // Event handler for logging out
+  logout(): void {
+    console.error('Logout clicked.');
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+  
   }

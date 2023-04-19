@@ -23,7 +23,7 @@ export class LoginComponent  {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -61,6 +61,7 @@ export class LoginComponent  {
             return response;
           },
           error: (error: any) => {
+            console.log("Login Error");
             this.alertService.showAlert('Invalid email or password');
           }
         });

@@ -53,6 +53,7 @@
     text-align: center;
     color: #eb6039;
     }
+    
 
     .mat-row {
         background-color: transparent !important;
@@ -61,4 +62,44 @@
       .button-container {
         display: flex;
         justify-content: center;
+      }
+    
+      .tax-report-section,
+      .logout-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #424242;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .generate-button {
+        background-color: green !important;
+        color: white !important;
+      }
+      
+      .logout-button {
+        background-color: #FA4616 !important;
+        color: white !important;
+      }
+      .box-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .stats-section,
+      .tax-report-section,
+      .logout-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #424242;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
