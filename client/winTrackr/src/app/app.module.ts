@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { UserStatisticsComponent } from './archive/user-statistics/user-statistics.component';
 import { LoginComponent } from './public/login/login.component';
+import { SharedModule } from './shared/shared.module';
 // add this import at top
 import { CookieService } from 'ngx-cookie-service';
 // below insert CookieService in the providers array:
@@ -27,7 +28,7 @@ import { CookieService } from 'ngx-cookie-service';
     RegistrationComponentComponent,
     LoginComponentComponent,
     UserStatisticsComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     BrowserAnimationsModule,
     MatTableModule,
+    SharedModule,
     MyMaterialModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },

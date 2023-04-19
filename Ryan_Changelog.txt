@@ -97,3 +97,4 @@ Fixed by setting relevant entries in package.json and package_lock.json to 15.2.
 ----------------------------------------------------------------------------------------
 
 04/18/2023 - Ryan - 06
+- Removed "@angular/material/prebuilt-themes/purple-green.css", in angular.json
