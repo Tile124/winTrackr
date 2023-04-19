@@ -18,6 +18,6 @@ import { ScratchOffEntryService } from './services/scratch-off-entry.service';
   ],
   providers: [
     ScratchOffEntryService,
-  ]
+  ],
 })
 export class CoreModule { }

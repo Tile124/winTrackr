@@ -26,6 +26,8 @@ import { PrivateModule } from './private/private.module';
 // add this import at top
 import { CookieService } from 'ngx-cookie-service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './alert/alert.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegistrationComponentComponent,
     LoginComponentComponent,
     UserStatisticsComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     PublicModule,
     PrivateModule,
+    MatSnackBarModule,
     
     /*
     RouterModule.forRoot([
@@ -65,6 +69,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     */
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
