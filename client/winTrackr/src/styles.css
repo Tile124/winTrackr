@@ -14,3 +14,22 @@ html, body {
 body {
     background: 	#C7C9C8;
 }
+
+.alert-red {
+  background-color: red !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-label {
+  background-color: red !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-surface {
+  background-color: red !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container.red-snackbar {
+  background-color: red !important;
+}

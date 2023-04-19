@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AlertService } from 'app/core/services/alert.service';
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertService: AlertService,
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -40,7 +42,7 @@ export class RegistrationComponent implements OnInit {
           },
           (error) => {
             console.error('Registration error:', error);
-            // Handle errors, e.g., show a message to the user
+            this.alertService.showAlert('Registration Error');
           }
         );
     }

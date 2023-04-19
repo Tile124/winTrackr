@@ -8,6 +8,8 @@ import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertService } from 'app/core/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent  {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -43,8 +46,8 @@ export class LoginComponent  {
             return response;
           },
           error: (error: any) => {
-            // TODO: display error 
-            //userLabel.textContent = error;
+            console.log("Login Error");
+            this.alertService.showAlert('Invalid email or password');
           }
         });
     }
