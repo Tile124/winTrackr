@@ -4,9 +4,10 @@
 * Ryan Rodriguez
 * Last modified: 04/17/2023
 */
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,59 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+
+      /*
+      this.http
+        .post('/api/login', { email, password })
+        .subscribe(
+          (response) => {
+            console.log('Login success:', response);
+            // Perform any additional actions upon successful login, e.g., navigate to another page
+          },
+          (error) => {
+            console.error('Login error:', error);
+            // Handle errors, e.g., show a message to the user
+          }
+        );
+      */
+
+      this.authService.login(email, password)
+        .subscribe({
+          next: (response: any) => {
+            this.router.navigate(['/dashboard']);
+            return response;
+          },
+          error: (error: any) => {
+            // TODO: display error 
+            //userLabel.textContent = error;
+          }
+        });
+    }
+  }
+}
+
+
+  /*
+  constructor(private httpService: HttpService, private router: Router, private cookieService: CookieService) { }
 
   login(): void {
     // TODO: Authenticate user via API request
@@ -36,3 +88,5 @@ export class LoginComponent {
       });
   };
 }
+*/
+

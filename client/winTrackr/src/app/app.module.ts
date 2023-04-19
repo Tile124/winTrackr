@@ -19,7 +19,8 @@ import { LoginComponent } from './public/login/login.component';
 import { SharedModule } from './shared/shared.module';
 // add this import at top
 import { CookieService } from 'ngx-cookie-service';
-// below insert CookieService in the providers array:
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +44,10 @@ import { CookieService } from 'ngx-cookie-service';
     MatTableModule,
     SharedModule,
     MyMaterialModule,
+    RouterModule.forRoot([]),
+    ReactiveFormsModule,
+    
+    /*
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: 'register', component: RegistrationComponentComponent },
@@ -50,6 +55,7 @@ import { CookieService } from 'ngx-cookie-service';
       
     
     ]),
+    */
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

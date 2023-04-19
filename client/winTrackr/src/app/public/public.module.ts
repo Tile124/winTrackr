@@ -11,6 +11,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PublicStatisticsComponent } from './public-statistics/public-statistics.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,11 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     HomepageComponent,
     PublicStatisticsComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     CommonModule,
     MatButtonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule,
   ]
 })
 export class PublicModule { }
