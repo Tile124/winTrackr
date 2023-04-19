@@ -16,6 +16,14 @@ import (
 	"github.com/google/uuid"
 )
 
+type scratchoff struct {
+	name string
+	id   string
+	// TODO: date
+	prize        int
+	serialNumber int
+}
+
 type user struct {
 	email    string
 	password string

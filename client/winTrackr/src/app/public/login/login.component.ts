@@ -6,8 +6,7 @@
 */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../http.service';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,18 +15,18 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
 
-  constructor(private httpService: HttpService, private router: Router, private cookieService: CookieService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   login(): void {
     // TODO: Authenticate user via API request
-    // If successful, navigate to home page
+    // If successful, navigate to home page 
     this.router.navigate(['/dashboard']);
   }
 
   onUserLogin(email: string, password: string, userLabel: HTMLElement) {
-    this.httpService.userLogin(email, password)
+    this.authService.login(email, password)
       .subscribe({
-        next: (response: any) => { // TODO: LOGIN USER (redirect to home/welcome page?)
+        next: (response: any) => {
           this.login();
           return response;
         },
