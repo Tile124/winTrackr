@@ -43,6 +43,8 @@ import { CookieService } from 'ngx-cookie-service';
     MatTableModule,
     SharedModule,
     MyMaterialModule,
+    RouterModule.forRoot([]),
+    /*
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: 'register', component: RegistrationComponentComponent },
@@ -50,6 +52,7 @@ import { CookieService } from 'ngx-cookie-service';
       
     
     ]),
+    */
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
