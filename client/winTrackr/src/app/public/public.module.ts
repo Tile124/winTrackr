@@ -10,10 +10,16 @@ import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicStatisticsComponent } from './public-statistics/public-statistics.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MyMaterialModule } from '../material.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatOptionModule } from '@angular/material/core';
 
 
 
@@ -22,6 +28,7 @@ import { RouterModule } from '@angular/router';
     HomepageComponent,
     PublicStatisticsComponent,
     RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +36,11 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MyMaterialModule,
+    MatTableModule,
+    MatOptionModule,
   ]
 })
 export class PublicModule { }

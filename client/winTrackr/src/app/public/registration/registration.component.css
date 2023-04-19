@@ -1,0 +1,28 @@
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-startr;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 60px auto 0;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button {
+  background-color: #FF9800;
+  color: #FFFFFF;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

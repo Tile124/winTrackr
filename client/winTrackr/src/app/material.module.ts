@@ -12,11 +12,27 @@ import { MatInputModule} from '@angular/material/input';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatListModule} from '@angular/material/list';
 import { FormsModule} from '@angular/forms'
+import { MatSelectModule } from '@angular/material/select';
+
+const materialComponents = [
+    MatButtonModule,
+    MatToolbarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatListModule,
+    FormsModule,
+    MatSelectModule
+    ];
 
 @NgModule({
-imports: [MatButtonModule,MatToolbarModule, FormsModule, MatNativeDateModule,MatDatepickerModule,MatIconModule,MatCheckboxModule,MatFormFieldModule,MatCardModule,MatInputModule, MatListModule, MatRadioModule],
-exports: [MatNativeDateModule,FormsModule,
-    MatDatepickerModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatToolbarModule, MatCardModule,MatFormFieldModule,MatInputModule,MatListModule,MatRadioModule,],
+imports: [materialComponents],
+exports: [materialComponents],
 
 })
 

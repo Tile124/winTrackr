@@ -2,7 +2,7 @@
 * This handles the login code
 * @Tile124
 * Ryan Rodriguez
-* Last modified: 04/17/2023
+* Last modified: 04/19/2023
 */
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent  {
   loginForm: FormGroup;
 
   constructor(
@@ -34,6 +34,7 @@ export class LoginComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    console.log('Login button pressed')
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;

@@ -15,8 +15,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { UserStatisticsComponent } from './archive/user-statistics/user-statistics.component';
-import { LoginComponent } from './public/login/login.component';
 import { SharedModule } from './shared/shared.module';
+/*
+import { RegistrationComponent } from './public/registration/registration.component';
+import { LoginComponent } from './public/login/login.component';
+*/
+
+import { PublicModule } from './public/public.module';
 // add this import at top
 import { CookieService } from 'ngx-cookie-service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +34,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegistrationComponentComponent,
     LoginComponentComponent,
     UserStatisticsComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MyMaterialModule,
     RouterModule.forRoot([]),
     ReactiveFormsModule,
+    PublicModule,
     
     /*
     RouterModule.forRoot([
