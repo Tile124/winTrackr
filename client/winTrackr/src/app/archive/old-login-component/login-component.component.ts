@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpService, User } from '../../http.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login-component',
@@ -7,12 +7,12 @@ import { HttpService, User } from '../../http.service';
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent {
-  constructor(private httpService: HttpService) {};
+  constructor(private authService: AuthService) {};
 
   onUserLogin(email: string, password: string, userLabel: HTMLElement) {
-    this.httpService.userLogin(email, password)
+    this.authService.login(email, password)
       .subscribe({
-        next: (response) => { // TODO: LOGIN USER (redirect to home/welcome page?)
+        next: (response) => {
           console.log(response);
           return response;
         },

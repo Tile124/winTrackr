@@ -6,11 +6,8 @@
 */
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../http.service';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-login',
@@ -23,7 +20,7 @@ export class LoginComponent  {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -39,6 +36,7 @@ export class LoginComponent  {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
+      /*
       this.http
         .post('/api/login', { email, password })
         .subscribe(
@@ -51,6 +49,19 @@ export class LoginComponent  {
             // Handle errors, e.g., show a message to the user
           }
         );
+      */
+
+      this.authService.login(email, password)
+        .subscribe({
+          next: (response: any) => {
+            this.router.navigate(['/dashboard']);
+            return response;
+          },
+          error: (error: any) => {
+            // TODO: display error 
+            //userLabel.textContent = error;
+          }
+        });
     }
   }
 }
@@ -61,14 +72,14 @@ export class LoginComponent  {
 
   login(): void {
     // TODO: Authenticate user via API request
-    // If successful, navigate to home page
+    // If successful, navigate to home page 
     this.router.navigate(['/dashboard']);
   }
 
   onUserLogin(email: string, password: string, userLabel: HTMLElement) {
-    this.httpService.userLogin(email, password)
+    this.authService.login(email, password)
       .subscribe({
-        next: (response: any) => { // TODO: LOGIN USER (redirect to home/welcome page?)
+        next: (response: any) => {
           this.login();
           return response;
         },

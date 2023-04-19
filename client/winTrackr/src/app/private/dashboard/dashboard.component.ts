@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../http.service';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,17 +10,18 @@ import { CookieService } from 'ngx-cookie-service';
 export class DashboardComponent implements OnInit {
   message: string = "Loading...";
 
-  constructor(private httpService: HttpService) { };
+  constructor(private authService: AuthService, private router: Router) { };
 
   ngOnInit(): void {
-    this.httpService.userHome()
+    this.authService.userLanding()
       .subscribe({
-        next: (response: any) => { // TODO: LOGIN USER (redirect to home/welcome page?)
+        next: (response: any) => {
           this.message = response;
           return response;
         },
         error: (error: any) => {
           this.message = "Error";
+          this.router.navigate(['/']);
         }
       });
   }
