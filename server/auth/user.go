@@ -331,7 +331,7 @@ func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	// If the session is present, but has expired, we can delete the session, and return
+	// If the session is present, bgitut has expired, we can delete the session, and return
 	// an unauthorized status
 	if userSession.isExpired() {
 		delete(sessions, sessionToken)
