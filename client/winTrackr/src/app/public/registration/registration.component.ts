@@ -28,7 +28,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Registration button pressed')
-    if (this.registrationForm.valid) {
+    //if (this.registrationForm.valid) {
       const formData = this.registrationForm.value;
 
       this.http
@@ -44,5 +44,5 @@ export class RegistrationComponent implements OnInit {
           }
         );
     }
-  }
+  //}
 }

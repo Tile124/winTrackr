@@ -32,7 +32,7 @@ export class LoginComponent  {
 
   onSubmit(): void {
     console.log('Login button pressed')
-    if (this.loginForm.valid) {
+  //  if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
@@ -63,7 +63,7 @@ export class LoginComponent  {
           }
         });
     }
-  }
+ // }
 }
 
 
