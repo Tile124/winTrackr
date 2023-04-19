@@ -37,11 +37,28 @@ export class HttpService {
     }
   }
 
+  userHome() {
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      withCredentials: true,
+      responseType: "text" as const
+    };
+
+    const content = null;
+    return this.http.post("http://localhost:3000/auth/home", content, requestOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   userLogin(email: string, password: string) {
     const requestOptions = {                                                                                                                                                                                 
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       }),
+      withCredentials: true,
       responseType: "text" as const
     };
 

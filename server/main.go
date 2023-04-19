@@ -29,6 +29,7 @@ func main() {
 		AllowOriginRequestFunc: func(r *http.Request, origin string) bool {
 			return origin == "http://localhost:4200"
 		},
+		AllowCredentials: true,
 		/*
 			AllowedOrigins: []string{"http://localhost:4200"},
 			AllowedHeaders: []string{"Username", "Passwordhash"},

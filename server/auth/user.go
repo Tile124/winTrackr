@@ -42,6 +42,7 @@ func init() {
 }
 
 func initUsers() {
+	sessions = make(map[string]session)
 	userList = make([]user, 0)
 	userList = append(userList, user{
 		email:    "admin",
@@ -250,9 +251,6 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rw.WriteHeader(http.StatusOK)
-	//rw.Write([]byte(tokenString)) // TODO
-
 	sessionToken := uuid.NewString()
 	expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
 
@@ -262,10 +260,14 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(rw, &http.Cookie{
-		Name:    "session_token",
-		Value:   sessionToken,
-		Expires: expiresAt,
+		Name:     "sessionToken",
+		Value:    sessionToken,
+		Expires:  expiresAt,
+		HttpOnly: false,
+		Path:     "/",
 	})
+
+	rw.WriteHeader(http.StatusOK)
 
 	/*
 		// validate the request first.
@@ -309,7 +311,7 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 
 func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
 	// We can obtain the session token from the requests cookies, which come with every request
-	c, err := r.Cookie("session_token")
+	c, err := r.Cookie("sessionToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			// If the cookie is not set, return an unauthorized status

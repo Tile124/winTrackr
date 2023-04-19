@@ -21,7 +21,7 @@ export class LoginComponent {
   login(): void {
     // TODO: Authenticate user via API request
     // If successful, navigate to home page
-    this.router.navigate(['/home']);
+    this.router.navigate(['/dashboard']);
   }
 
   onUserLogin(email: string, password: string, userLabel: HTMLElement) {
