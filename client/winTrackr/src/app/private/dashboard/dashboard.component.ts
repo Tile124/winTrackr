@@ -23,8 +23,12 @@ export class DashboardComponent implements OnInit {
   entries: MatTableDataSource<Entry>;
   entryForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, 
-    private alertService: AlertService,) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder, 
+    private alertService: AlertService,
+  ) {
     this.entries = new MatTableDataSource<Entry>([]);
     this.entryForm = this.formBuilder.group({
       name: ['', Validators.required],
