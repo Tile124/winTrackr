@@ -1,0 +1,23 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  mat-card {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  button {
+    background-color: #FF9800;
+    color: #FFFFFF;
+  }
+  
+  
+  

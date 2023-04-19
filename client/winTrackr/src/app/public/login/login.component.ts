@@ -4,10 +4,13 @@
 * Ryan Rodriguez
 * Last modified: 04/17/2023
 */
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../../http.service';
 import { CookieService } from 'ngx-cookie-service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,44 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm: FormGroup;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+
+      this.http
+        .post('/api/login', { email, password })
+        .subscribe(
+          (response) => {
+            console.log('Login success:', response);
+            // Perform any additional actions upon successful login, e.g., navigate to another page
+          },
+          (error) => {
+            console.error('Login error:', error);
+            // Handle errors, e.g., show a message to the user
+          }
+        );
+    }
+  }
+}
+
+
+  /*
   constructor(private httpService: HttpService, private router: Router, private cookieService: CookieService) { }
 
   login(): void {
@@ -37,3 +77,5 @@ export class LoginComponent {
       });
   };
 }
+*/
+
