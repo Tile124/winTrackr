@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
         },
         error: (error: any) => {
           this.message = "Error";
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         }
       });
   }

@@ -36,21 +36,6 @@ export class LoginComponent  {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
-      /*
-      this.http
-        .post('/api/login', { email, password })
-        .subscribe(
-          (response) => {
-            console.log('Login success:', response);
-            // Perform any additional actions upon successful login, e.g., navigate to another page
-          },
-          (error) => {
-            console.error('Login error:', error);
-            // Handle errors, e.g., show a message to the user
-          }
-        );
-      */
-
       this.authService.login(email, password)
         .subscribe({
           next: (response: any) => {
@@ -65,29 +50,4 @@ export class LoginComponent  {
     }
  // }
 }
-
-
-  /*
-  constructor(private httpService: HttpService, private router: Router, private cookieService: CookieService) { }
-
-  login(): void {
-    // TODO: Authenticate user via API request
-    // If successful, navigate to home page 
-    this.router.navigate(['/dashboard']);
-  }
-
-  onUserLogin(email: string, password: string, userLabel: HTMLElement) {
-    this.authService.login(email, password)
-      .subscribe({
-        next: (response: any) => {
-          this.login();
-          return response;
-        },
-        error: (error: any) => {
-          userLabel.textContent = error;
-        }
-      });
-  };
-}
-*/
 
