@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicStatisticsComponent } from './public-statistics/public-statistics.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -20,7 +21,8 @@ import { RegistrationComponent } from './registration/registration.component';
     RegistrationComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
   ]
 })
 export class PublicModule { }
