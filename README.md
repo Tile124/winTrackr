@@ -12,7 +12,7 @@ Additionally, https://scratchoff-odds.com/state/fl/game/3167
 # Members
 Ryan Rodriguez (Front-end), Sean Hernandez (Front-end), Alejandro Leon (Back-end), Abraham Azulay Vasilescu (Back-end) 
 
-To run
+# To run
 
 Front end:
 (If needed)Install Angular https://github.com/angular/angular-cli
