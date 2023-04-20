@@ -1,3 +1,4 @@
+describe('Basic Login tests', () => {
 it('should display the Login component', () => {
   cy.visit('login');
   cy.get('.login-container').should('be.visible');
@@ -40,3 +41,28 @@ it('should log the user in and redirect to dashboard when entering valid credent
   cy.get('button[type="submit"]').click();
   cy.url().should('eq', 'http://localhost:4200/dashboard');
 });
+});
+
+describe('Advanced Login tests', () => {
+  beforeEach(() => {
+    cy.visit('/login');
+  });
+
+  it('should show an error message when email field is left empty and the login button is clicked', () => {
+    cy.get('[type="submit"]').click();
+    cy.contains('Login Error').should('exist');
+  });
+
+  it('should show an error message when an invalid email is entered and the login button is clicked', () => {
+    cy.get('[formControlName="email"]').type('test');
+    cy.get('[type="submit"]').click();
+    cy.contains('Login Error').should('exist');
+  });
+
+  it('should show an error message when the password field is left empty and the login button is clicked', () => {
+    cy.get('[formControlName="email"]').type('test@test.com');
+    cy.get('[type="submit"]').click();
+    cy.contains('Login Error').should('exist');
+  });
+})
+
