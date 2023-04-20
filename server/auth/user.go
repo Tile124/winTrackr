@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"sync"
 	"time"
 
@@ -13,25 +14,13 @@ import (
 	"github.com/google/uuid"
 )
 
-type scratchoff struct {
-	gameName  string
-	gameId    string
-	date      string
-	winAmount int
-}
-
-type user struct {
-	email    string
-	password string
-}
-
 type userCredentials struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
 type session struct {
-	email  string
+	user   db.User
 	expiry time.Time
 }
 
@@ -52,20 +41,12 @@ func (s session) isExpired() bool {
 	return s.expiry.Before(time.Now())
 }
 
-func GetUserObject(email string) (user, bool) {
-	var u user
-	password, err := db.GetUserCredentials(email)
-
+func GetUserObject(email string) (db.User, bool) {
+	u, err := db.GetUserCredentials(email)
 	if err != nil {
 		return u, false
 	}
-	u.email = email
-	u.password = password
 	return u, true
-}
-
-func (u *user) ValidatePasswordHash(hash string) bool {
-	return u.password == hash
 }
 
 func AddUserObject(credentials *userCredentials) bool {
@@ -77,15 +58,17 @@ func AddUserObject(credentials *userCredentials) bool {
 }
 
 // search user in database based on credentials
-func validateUser(credentials *userCredentials) (bool, error) {
+func validateUser(credentials *userCredentials) (db.User, error) {
 	// find user by email
 	usr, exists := GetUserObject(credentials.Email)
 	if !exists {
-		return false, errors.New("user does not exist")
+		return usr, errors.New("User with given email does not exist")
 	}
 	// validate password
-	passwordCheck := usr.ValidatePasswordHash(credentials.Password)
-	return passwordCheck, nil
+	if !usr.ValidatePasswordHash(credentials.Password) {
+		return usr, errors.New("Incorrect password")
+	}
+	return usr, nil
 }
 
 // register user handler
@@ -123,17 +106,10 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// validate user
-	valid, err := validateUser(credentials)
-	// if user does not exist
+	usr, err := validateUser(credentials)
 	if err != nil {
 		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("User with given email does not exist"))
-		return
-	}
-	// if password is incorrect
-	if !valid {
-		rw.WriteHeader(http.StatusUnauthorized)
-		rw.Write([]byte("Incorrect password"))
+		rw.Write([]byte(err.Error()))
 		return
 	}
 
@@ -141,7 +117,7 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
 
 	sessions[sessionToken] = session{
-		email:  credentials.Email,
+		user:   usr,
 		expiry: expiresAt,
 	}
 
@@ -188,5 +164,108 @@ func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
 
 	// If the session is valid, return the welcome message to the user
 	rw.WriteHeader(http.StatusOK)
-	rw.Write([]byte(fmt.Sprintf("Welcome %s!", userSession.email)))
+	rw.Write([]byte(fmt.Sprintf("Welcome %s!", userSession.user.Email)))
+}
+
+// get scratchoffs handler
+func GetScratchoffsHandler(rw http.ResponseWriter, r *http.Request) {
+	// We can obtain the session token from the requests cookies, which come with every request
+	c, err := r.Cookie("sessionToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			rw.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		rw.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	sessionToken := c.Value
+
+	// We then get the session from our session map
+	userSession, exists := sessions[sessionToken]
+	if !exists {
+		// If the session token is not present in session map, return an unauthorized error
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	// If the session is present, bgitut has expired, we can delete the session, and return
+	// an unauthorized status
+	if userSession.isExpired() {
+		delete(sessions, sessionToken)
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	scratchoffs, err := db.GetScratchoffsByUser(userSession.user.UserID)
+	if err != nil {
+		rw.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// If the session is valid, return scratchoffs
+	rw.Header().Set("Content-Type", "application/json")
+	rw.WriteHeader(http.StatusOK)
+	json.NewEncoder(rw).Encode(scratchoffs)
+}
+
+func AddScratchoffHandler(rw http.ResponseWriter, r *http.Request) {
+	// decode request body
+	scratchoffData := &db.ScratchoffData{}
+	err := json.NewDecoder(r.Body).Decode(scratchoffData)
+	if err != nil {
+		log.Printf("verbose error info: %#v", err)
+		rw.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	prize, err := strconv.ParseInt(scratchoffData.Prize, 10, 64)
+	if err != nil {
+		rw.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	// We can obtain the session token from the requests cookies, which come with every request
+	c, err := r.Cookie("sessionToken")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			rw.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		rw.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	sessionToken := c.Value
+
+	// We then get the session from our session map
+	userSession, exists := sessions[sessionToken]
+	if !exists {
+		// If the session token is not present in session map, return an unauthorized error
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	// If the session is present, bgitut has expired, we can delete the session, and return
+	// an unauthorized status
+	if userSession.isExpired() {
+		delete(sessions, sessionToken)
+		rw.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	_, err = db.InsertScratchoff(
+		userSession.user.UserID,
+		scratchoffData.Name,
+		scratchoffData.GameID,
+		prize,
+		scratchoffData.Date)
+	if err != nil {
+		log.Fatal(err)
+		rw.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// If the session is valid, return the welcome message to the user
+	rw.WriteHeader(http.StatusOK)
 }

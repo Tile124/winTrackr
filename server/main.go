@@ -23,6 +23,11 @@ func main() {
 	authRouter.HandleFunc("/login", auth.LoginHandler)
 	authRouter.HandleFunc("/home", auth.UserHomeHandler)
 
+	// api router setup
+	apiRouter := mainRouter.PathPrefix("/api").Subrouter()
+	apiRouter.HandleFunc("/get-scratchoffs", auth.GetScratchoffsHandler)
+	apiRouter.HandleFunc("/add-scratchoff", auth.AddScratchoffHandler)
+
 	// cors config
 	c := cors.New(cors.Options{
 		AllowOriginRequestFunc: func(r *http.Request, origin string) bool {
