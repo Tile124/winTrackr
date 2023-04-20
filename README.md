@@ -11,3 +11,28 @@ Additionally, https://scratchoff-odds.com/state/fl/game/3167
 
 # Members
 Ryan Rodriguez (Front-end), Sean Hernandez (Front-end), Alejandro Leon (Back-end), Abraham Azulay Vasilescu (Back-end) 
+
+To run
+
+Front end:
+(If needed)Install Angular https://github.com/angular/angular-cli
+
+(If needed)Install NodeJS https://nodejs.org/en
+
+navigate to client/wintrackr
+do npm install
+ng serve
+Front end now running on http://localhost:4200/
+
+Back end:
+
+(If needed)Install go on your system https://go.dev/dl/ 
+navigate to /server
+npm install
+go get github.com/gorilla/mux
+go run main.
+
+
+node modules should be installed by npm install. dependency resolution may be required.
+
+Angular version: 5.2.1.
