@@ -14,7 +14,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type userCredentials struct {
+type UserCredentials struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -49,7 +49,7 @@ func GetUserObject(email string) (db.User, bool) {
 	return u, true
 }
 
-func AddUserObject(credentials *userCredentials) bool {
+func AddUserObject(credentials *UserCredentials) bool {
 	_, err := db.InsertUser(credentials.Email, credentials.Password)
 	if err != nil {
 		return false
@@ -58,7 +58,7 @@ func AddUserObject(credentials *userCredentials) bool {
 }
 
 // search user in database based on credentials
-func validateUser(credentials *userCredentials) (db.User, error) {
+func ValidateUser(credentials *UserCredentials) (db.User, error) {
 	// find user by email
 	usr, exists := GetUserObject(credentials.Email)
 	if !exists {
@@ -74,7 +74,7 @@ func validateUser(credentials *userCredentials) (db.User, error) {
 // register user handler
 func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 	// decode request body
-	credentials := &userCredentials{}
+	credentials := &UserCredentials{}
 	err := json.NewDecoder(r.Body).Decode(credentials)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -97,7 +97,7 @@ func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 // login user handler
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	// decode request body
-	credentials := &userCredentials{}
+	credentials := &UserCredentials{}
 	err := json.NewDecoder(r.Body).Decode(credentials)
 	if err != nil {
 		log.Printf("verbose error info: %#v", err)
@@ -106,7 +106,7 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// validate user
-	usr, err := validateUser(credentials)
+	usr, err := ValidateUser(credentials)
 	if err != nil {
 		rw.WriteHeader(http.StatusUnauthorized)
 		rw.Write([]byte(err.Error()))

@@ -70,7 +70,6 @@ export class ScratchOffEntryService {
       Prize: entry.winAmount,
       Date: entry.date,
     } as ScratchOffData;
-    console.log(scratchoffData)
     return this.http.post(addScratchoffUrl, scratchoffData, httpOptions).pipe(catchError(this.handleError))
     .subscribe((res)=>{
       console.log(res)

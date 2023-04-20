@@ -59,7 +59,10 @@ export class DashboardComponent implements OnInit {
   refreshEntries(): void {
     this.scratchOffEntryService.getEntries()
       .subscribe((res)=>{
-        const resEntries = res as ScratchoffFullData[]
+        var resEntries = res as ScratchoffFullData[]
+        if (resEntries == null) {
+          return
+        }
         const entries: Entry[] = [];
         for (let i = 0; i < resEntries.length; i++) {
           var entry = resEntries.at(i);
