@@ -1,6 +1,12 @@
 # Sprint 4
 
-Sprint 4 was the most productive sprint. 
+Videos:
+
+Presentation: https://youtu.be/eLDklLnyJKc
+Frontend tests: https://youtu.be/QHdFGh64qi0
+Sprint 4: https://youtu.be/tdOi--WdzSQ
+
+Sprint 4 was the most productive sprint.
 + Restructured the entire project into public, private, shared, and auth modules
 + Created Homepage, Login, Registration, Toolbar, and dashboard components
 + Wrote the css,html,and ts code of each new component.
