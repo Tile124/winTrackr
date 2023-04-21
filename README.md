@@ -20,17 +20,27 @@ Front end:
 (If needed)Install NodeJS https://nodejs.org/en
 
 navigate to client/wintrackr
->npm install
->ng serve
+```
+npm install
+```
+```
+ng serve
+```
 Front end now running on http://localhost:4200/
 
 Back end:
 
 (If needed)Install go on your system https://go.dev/dl/ 
 navigate to /server
->npm install
->go get github.com/gorilla/mux
->go run main
+```
+npm install
+```
+```
+go get github.com/gorilla/mux
+```
+```
+go run main
+```
 
 
 node modules should be installed by npm install. dependency resolution may be required.
