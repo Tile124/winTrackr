@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { tap}   from 'rxjs/operators';
 
 export interface User {
   email: string
@@ -10,7 +11,7 @@ export interface User {
 }
 
 export namespace AuthData {
-  export const baseUrl: string = "http://localhost:3000/auth/";
+  export const baseUrl: string = "http://35.225.28.21:3000/auth/";
   export const loginUrl: string = baseUrl + "login";
   export const registerUrl: string = baseUrl + "register";
   export const landingUrl: string = baseUrl + "home";
@@ -28,7 +29,8 @@ export namespace AuthData {
       "Content-Type": "application/json"
     }),
     withCredentials: true,
-    responseType: "text" as const
+    responseType: "text" as const,
+    observe: "response" as const,
   };
 }
 
@@ -52,24 +54,28 @@ export class AuthService {
   login(email: string, password: string) {
     const credentials = { email, password } as User;
     return this.http.post(AuthData.loginUrl, credentials, AuthData.credentialRequestOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+    .pipe(
+      tap((response: HttpResponse<any>) => {
+        const setCookieHeader = response.headers.get("Set-Cookie");
+        console.log("Set-Cookie header:", setCookieHeader);
+      }),
+      catchError(this.handleError)
+    );
   }
 
   register(email: string, password: string) {
     const credentials = { email, password } as User;
-    return this.http.post(AuthData.registerUrl, credentials, AuthData.baseRequestOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+  return this.http.post(AuthData.registerUrl, credentials, AuthData.credentialRequestOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   userLanding() { // TODO: rework
     return this.http.post(AuthData.landingUrl, null, AuthData.credentialRequestOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   logout() {

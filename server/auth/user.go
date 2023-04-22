@@ -96,6 +96,7 @@ func RegisterHandler(rw http.ResponseWriter, r *http.Request) {
 
 // login user handler
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
+	log.Printf("Login request received")
 	// decode request body
 	credentials := &UserCredentials{}
 	err := json.NewDecoder(r.Body).Decode(credentials)
@@ -108,40 +109,50 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	// validate user
 	usr, err := ValidateUser(credentials)
 	if err != nil {
+		log.Printf("Error occured when validating user: %s", err.Error())
 		rw.WriteHeader(http.StatusUnauthorized)
 		rw.Write([]byte(err.Error()))
 		return
 	}
 
 	sessionToken := uuid.NewString()
-	expiresAt := time.Now().Add(120 * time.Second) // TODO: set time as const
+	expiresAt := time.Now().Add(500 * time.Second) // TODO: set time as const
 
 	sessions[sessionToken] = session{
 		user:   usr,
 		expiry: expiresAt,
 	}
-
-	http.SetCookie(rw, &http.Cookie{
+	log.Printf("Setting cookie")
+	cookie := &http.Cookie{
 		Name:     "sessionToken",
 		Value:    sessionToken,
 		Expires:  expiresAt,
-		HttpOnly: false,
+		HttpOnly: true,
 		Path:     "/",
-	})
+		Secure:   false,
+		SameSite: http.SameSiteNoneMode,
+	}
 
+	rw.Header().Set("Access-Control-Allow-Credentials", "true")
+	rw.Header().Set("Access-Control-Allow-Origin", "http://winTrackr.com")
+	rw.Header().Set("Access-Control-Expose-Headers", "Set-Cookie")
+	http.SetCookie(rw, cookie)
 	rw.WriteHeader(http.StatusOK)
 }
 
 func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
 	// We can obtain the session token from the requests cookies, which come with every request
+	log.Printf("UserHomeHandler called")
 	c, err := r.Cookie("sessionToken")
 	if err != nil {
 		if err == http.ErrNoCookie {
+			log.Printf("Cookie not set")
 			// If the cookie is not set, return an unauthorized status
 			rw.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 		// For any other type of error, return a bad request status
+		log.Printf("Something went wrong")
 		rw.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -157,6 +168,7 @@ func UserHomeHandler(rw http.ResponseWriter, r *http.Request) {
 	// If the session is present, bgitut has expired, we can delete the session, and return
 	// an unauthorized status
 	if userSession.isExpired() {
+		log.Printf("Cookie expired")
 		delete(sessions, sessionToken)
 		rw.WriteHeader(http.StatusUnauthorized)
 		return

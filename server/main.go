@@ -29,16 +29,15 @@ func main() {
 	apiRouter.HandleFunc("/add-scratchoff", auth.AddScratchoffHandler)
 
 	// cors config
+
 	c := cors.New(cors.Options{
 		AllowOriginRequestFunc: func(r *http.Request, origin string) bool {
-			return origin == "http://localhost:4200"
+			return origin == "http://wintrackr.com"
 		},
 		AllowCredentials: true,
-
-		//AllowedOrigins: []string{"http://localhost:4200"},
-		//AllowedHeaders: []string{"Username", "Passwordhash"},
-
-		Debug: false, //true, // TEMP: for debugging
+		AllowedHeaders:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		Debug:            false,
 	})
 	handler := c.Handler(mainRouter)
 

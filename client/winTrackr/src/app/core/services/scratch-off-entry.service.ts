@@ -26,7 +26,7 @@ export interface ScratchoffFullData {
 	UserId: string;
 }
 
-const baseUrl = 'http://localhost:3000/api/'
+const baseUrl = 'http://35.225.28.21:3000/api/'
 const getScratchoffsUrl = baseUrl + 'get-scratchoffs';
 const addScratchoffUrl = baseUrl + 'add-scratchoff';
 
