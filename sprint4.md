@@ -1,10 +1,14 @@
 # Sprint 4
 
+
+You can access the website at winTrackr.com
+Use firefox to access it, as google chrome is blocking the cookies since the sameSite mode is set to none and I havent made the website SSL yet.
+
 Videos:
 
 Presentation: https://youtu.be/eLDklLnyJKc
-Frontend tests: https://youtu.be/QHdFGh64qi0
-Sprint 4: https://youtu.be/tdOi--WdzSQ
+Sprint 4: https://youtu.be/zBYPS4jL-I0
+Frontend tests(Also shown in sprint 4): https://youtu.be/QHdFGh64qi0
 
 Sprint 4 was the most productive sprint.
 + Restructured the entire project into public, private, shared, and auth modules
@@ -32,8 +36,8 @@ Sprint 4 was the most productive sprint.
  - homepage test
  - login test
  - registration test
- - toolbar tests
- - and a test that simulated a user going through the website
+ - toolbar test
+ - and a test that simulated a user going through the website (test user)
 
 **Back-End Unit Tests:**
  - User validation test
