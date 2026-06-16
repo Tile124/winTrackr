@@ -5,6 +5,7 @@ import (
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type ScratchoffData struct {
@@ -29,8 +30,9 @@ type User struct {
 	Password string
 }
 
-func (u *User) ValidatePasswordHash(hash string) bool {
-	return u.Password == hash
+func (u *User) ValidatePasswordHash(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+	return err == nil
 }
 
 var (
@@ -49,7 +51,6 @@ func InitDbs() {
 	userDb = database
 
 	createDbTables()
-	InsertUser("admin", "password")
 }
 
 func createDbTables() {
@@ -84,6 +85,11 @@ func createDbTables() {
 }
 
 func InsertUser(email string, password string) (int64, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return 0, err
+	}
+
 	statement := `
 	INSERT INTO users (email, password)
 	VALUES (?, ?)
@@ -94,7 +100,7 @@ func InsertUser(email string, password string) (int64, error) {
 	}
 	defer stmt.Close()
 
-	res, err := stmt.Exec(email, password)
+	res, err := stmt.Exec(email, string(hashedPassword))
 	if err != nil {
 		return 0, err
 	}
